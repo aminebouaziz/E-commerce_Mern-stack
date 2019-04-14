@@ -100,6 +100,7 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    //Validation
     const { errors, isValid } = validaeProfileInput(req.body);
 
     // Chekc validation

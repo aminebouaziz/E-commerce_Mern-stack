@@ -5,7 +5,7 @@ const passport = require("passport");
 
 const users = require("./routes/api/usersAuth");
 const profile = require("./routes/api/profile");
-const products = require("./routes/api/products");
+const product = require("./routes/api/product");
 
 const app = express();
 
@@ -31,7 +31,7 @@ require("./config/passeport")(passport);
 // Use Routes
 app.use("/api/users", users);
 app.use("/api/profile", profile);
-app.use("/api/products", products);
+app.use("/api/products", product);
 
 const port = process.env.PORT || 5000;
 
