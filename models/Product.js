@@ -7,6 +7,9 @@ const ProductSchema = new Schema({
     type: String,
     required: true
   },
+  imagePath: {
+    type: String
+  },
   category: {
     type: String,
     required: true
