@@ -15,6 +15,9 @@ const CardSchema = new Schema({
       }
     }
   ],
+  nameProduct: {
+    type: String
+  },
   totPrize: {
     type: Number
   },
@@ -26,3 +29,4 @@ const CardSchema = new Schema({
     default: Date.now
   }
 });
+module.exports = Card = mongoose.model("card", CardSchema);
