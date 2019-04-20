@@ -9,6 +9,7 @@ const product = require("./routes/api/product");
 const feedback = require("./routes/api/feedback");
 const card = require("./routes/api/card");
 const admin = require("./routes/api/adminAuth");
+const order = require("./routes/api/order");
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use("/api/products", product);
 app.use("/api/feedback", feedback);
 app.use("/api/card", card);
 app.use("/api/admin", admin);
+app.use("/api/order", order);
 
 const port = process.env.PORT || 5000;
 

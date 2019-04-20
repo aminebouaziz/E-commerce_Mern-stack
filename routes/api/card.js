@@ -115,4 +115,16 @@ router.delete(
   }
 );
 
+//  @route DELETE api/card/:id
+//  @desc Delete a card
+//  @acess Public
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Card.findById(req.params.id)
+      .then(card => card.remove().then(() => res.json({ success: true })))
+      .catch(err => res.status(404).json({ success: false }));
+  }
+);
 module.exports = router;
