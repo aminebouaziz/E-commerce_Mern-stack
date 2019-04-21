@@ -6,7 +6,7 @@ class Form extends Component {
       <form className="Form col-md-8">
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label for="inputEmail4">Email</label>
+            <label>Email</label>
             <input
               type="email"
               className="form-control"
@@ -15,7 +15,7 @@ class Form extends Component {
             />
           </div>
           <div className="form-group col-md-6">
-            <label for="inputPassword4">Password</label>
+            <label>Password</label>
             <input
               type="password"
               className="form-control"
@@ -25,7 +25,7 @@ class Form extends Component {
           </div>
         </div>
         <div className="form-group">
-          <label for="inputAddress">Address</label>
+          <label>Address</label>
           <input
             type="text"
             className="form-control"
@@ -34,7 +34,7 @@ class Form extends Component {
           />
         </div>
         <div className="form-group">
-          <label for="inputAddress2">Address 2</label>
+          <label>Address 2</label>
           <input
             type="text"
             className="form-control"
@@ -44,18 +44,18 @@ class Form extends Component {
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label for="inputCity">City</label>
+            <label>City</label>
             <input type="text" className="form-control" id="inputCity" />
           </div>
           <div className="form-group col-md-4">
-            <label for="inputState">State</label>
+            <label>State</label>
             <select id="inputState" className="form-control">
-              <option selected>Choose...</option>
+              <option defaultValue>Choose...</option>
               <option>...</option>
             </select>
           </div>
           <div className="form-group col-md-2">
-            <label for="inputZip">Zip</label>
+            <label>Zip</label>
             <input type="text" className="form-control" id="inputZip" />
           </div>
         </div>
@@ -66,9 +66,7 @@ class Form extends Component {
               type="checkbox"
               id="gridCheck"
             />
-            <label className="form-check-label" for="gridCheck">
-              Check me out
-            </label>
+            <label className="form-check-label">Check me out</label>
           </div>
         </div>
         <button type="submit" className="btn btn-primary">

@@ -13,7 +13,7 @@ class Navbar extends Component {
     };
     return (
       <nav
-        class="navbar navbar-expand-sm navbar-dark  mb-4"
+        className="navbar navbar-expand-sm navbar-dark  mb-4"
         style={{ backgroundColor: bgColors.Default }}
       >
         <div className="container">

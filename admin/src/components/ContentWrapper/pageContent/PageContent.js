@@ -12,7 +12,7 @@ class PageContent extends Component {
       <div class="container-fluid">
         <Heading />
         {/* <!-- Content Row --> */}
-        <div class="row">
+        <div className="row">
           <CardUser />
           <CardSell />
           <CardFeed />
