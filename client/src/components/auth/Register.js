@@ -22,7 +22,11 @@ class Register extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("profile");
+    }
+  }
   componentWillReceiveProps = nextPropos => {
     if (nextPropos.errors) {
       this.setState({ errors: nextPropos.errors });
