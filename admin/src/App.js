@@ -1,3 +1,4 @@
+// ADMIN SIDE
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -7,7 +8,6 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 import store from "./store";
 
-import SideBar from "./components/SideBar";
 import ContainWrapper from "./components/ContentWrapper/ContentWrapper";
 
 import "./App.css";

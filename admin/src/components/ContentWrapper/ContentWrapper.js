@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import TopBar from "./TopBar";
 import SideBar from "../SideBar";
@@ -8,6 +8,9 @@ import Footer from "./Footer";
 import Form from "./AddItem/Form";
 import Products from "./Products/Products";
 import Login from "./Login";
+import PrivateRoute from "../common/PrivateRoute";
+import Profiles from "../profiles/Profiles";
+import Profile from "../profile/Profile";
 
 class ContainWrapper extends Component {
   render() {
@@ -15,12 +18,24 @@ class ContainWrapper extends Component {
       <BrowserRouter>
         <SideBar />
         <div id="content-wrapper" className="d-flex flex-column">
-          {/* Main Content */}
           <div id="content">
             <TopBar />
-            <Route path="/dashboard" component={PageContent} />
-            <Route path="/addProduct" component={Form} />
-            <Route path="/products" component={Products} />
+
+            <Switch>
+              <PrivateRoute path="/products" component={Products} />
+            </Switch>
+            <Switch>
+              <PrivateRoute path="/addProduct" component={Form} />
+            </Switch>
+            <Switch>
+              <PrivateRoute path="/dashboard" component={PageContent} />
+            </Switch>
+            <Switch>
+              <PrivateRoute path="/user" component={Profiles} />
+            </Switch>
+
+            <PrivateRoute path="/profile/:handle" component={Profile} />
+
             <Route exact path="/" component={Login} />
             <Footer />
           </div>
