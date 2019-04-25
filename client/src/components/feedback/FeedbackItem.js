@@ -3,11 +3,27 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
-import { deleteFeedback } from "../../actions/feedbackAction";
+import {
+  deleteFeedback,
+  addLike,
+  removeLike
+} from "../../actions/feedbackAction";
 
 class FeedbackItem extends Component {
   onDeleteClick(id) {
     this.props.deleteFeedback(id);
+  }
+  onLikeClick(id) {
+    this.props.addLike(id);
+  }
+  onUnlikeClick(id) {
+    this.props.removeLike(id);
+  }
+  findUserLike(likes) {
+    const { auth } = this.props;
+    if (likes.filter(like => like.user === auth.user.id).length > 0) {
+      return true;
+    } else return false;
   }
   render() {
     const { feedback, auth } = this.props;
@@ -30,13 +46,25 @@ class FeedbackItem extends Component {
             <p className="lead">{feedback.text}</p>
 
             <span>
-              <button type="button" className="btn btn-light mr-1">
-                <i className="fas fa-thumbs-up" />
+              <button
+                onClick={this.onLikeClick.bind(this, feedback._id)}
+                type="button"
+                className="btn btn-light mr-1"
+              >
+                <i
+                  className={classnames("fas fa-thumbs-up", {
+                    "text-info": this.findUserLike(feedback.likes)
+                  })}
+                />
                 <span className="badge badge-light">
                   {feedback.likes.length}
                 </span>
               </button>
-              <button type="button" className="btn btn-light mr-1">
+              <button
+                onClick={this.onUnlikeClick.bind(this, feedback._id)}
+                type="button"
+                className="btn btn-light mr-1"
+              >
                 <i className="text-secondary fas fa-thumbs-down" />
               </button>
               <Link
@@ -65,6 +93,8 @@ class FeedbackItem extends Component {
 
 FeedbackItem.propTypes = {
   feedback: PropTypes.object.isRequired,
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired,
   deleteFeedback: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -75,5 +105,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteFeedback }
+  { deleteFeedback, addLike, removeLike }
 )(FeedbackItem);

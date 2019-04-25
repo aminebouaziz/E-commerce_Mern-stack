@@ -44,13 +44,6 @@ export const getFeedbacks = () => dispatch => {
     );
 };
 
-// set loading state
-export const setFeedbackLoading = () => {
-  return {
-    type: FEEDBACK_LOADING
-  };
-};
-
 // Delete feedback
 export const deleteFeedback = id => dispatch => {
   axios
@@ -67,4 +60,37 @@ export const deleteFeedback = id => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+// add like
+export const addLike = id => dispatch => {
+  axios
+    .post(`/api/feedback/like/${id}`)
+    .then(res => dispatch(getFeedbacks()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// remove like
+export const removeLike = id => dispatch => {
+  axios
+    .post(`/api/feedback/unlike/${id}`)
+    .then(res => dispatch(getFeedbacks()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// set loading state
+export const setFeedbackLoading = () => {
+  return {
+    type: FEEDBACK_LOADING
+  };
 };
