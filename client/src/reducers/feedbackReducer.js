@@ -2,7 +2,8 @@ import {
   ADD_FEEDBACK,
   GET_FEDDBACKS,
   FEEDBACK_LOADING,
-  DELETE_FEEDBACK
+  DELETE_FEEDBACK,
+  GET_FEDDBACK
 } from "../actions/types";
 
 const initialState = {
@@ -35,6 +36,12 @@ export default function(state = initialState, action) {
         feedbacks: state.feedbacks.filter(
           feedback => feedback._id !== action.payload
         )
+      };
+    case GET_FEDDBACK:
+      return {
+        ...state,
+        feedback: action.payload,
+        loading: false
       };
 
     default:

@@ -3,12 +3,15 @@ import {
   ADD_FEEDBACK,
   GET_ERRORS,
   GET_FEDDBACKS,
+  GET_FEDDBACK,
   FEEDBACK_LOADING,
-  DELETE_FEEDBACK
+  DELETE_FEEDBACK,
+  CLEAR_ERRORS
 } from "./types";
 
 // add feedback
 export const addFeedback = feedbackData => dispatch => {
+  dispatch(clearErrors());
   axios
     .post("/api/feedback", feedbackData)
     .then(res =>
@@ -92,5 +95,69 @@ export const removeLike = id => dispatch => {
 export const setFeedbackLoading = () => {
   return {
     type: FEEDBACK_LOADING
+  };
+};
+
+// Get Feedback
+export const getFeedback = id => dispatch => {
+  dispatch(setFeedbackLoading());
+  axios
+    .get(`/api/feedback/${id}`)
+    .then(res =>
+      dispatch({
+        type: GET_FEDDBACK,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_FEDDBACK,
+        payload: null
+      })
+    );
+};
+
+// add Comment
+
+export const addComment = (feedbackId, commentData) => dispatch => {
+  dispatch(clearErrors());
+  axios
+    .post(`/api/feedback/comment/${feedbackId}`, commentData)
+    .then(res =>
+      dispatch({
+        type: GET_FEDDBACK,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Delete comment
+export const deleteComment = (feedbackId, commentId) => dispatch => {
+  axios
+    .delete(`/api/feedback/comment/${feedbackId}/${commentId}`)
+    .then(res =>
+      dispatch({
+        type: GET_FEDDBACK,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
   };
 };

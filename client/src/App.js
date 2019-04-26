@@ -19,6 +19,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
 import Feedback from "./components/feedback/Feedback";
+import SingleFeedback from "./components/singleFeedback/SingleFeedback";
 
 import "./App.css";
 
@@ -66,6 +67,14 @@ class App extends Component {
             </Switch>
             <Switch>
               <PrivateRoute exact path="/feed" component={Feedback} />
+            </Switch>
+
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/feedback/:id"
+                component={SingleFeedback}
+              />
             </Switch>
 
             <Footer />
