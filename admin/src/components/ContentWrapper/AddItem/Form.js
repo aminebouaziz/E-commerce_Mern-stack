@@ -1,79 +1,139 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { addPorduct } from "../../../actions/productActions";
 
 class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      imagePath: "",
+      category: "",
+      prizeFourn: "",
+      prizeSell: "",
+      quantity: ""
+    };
+  }
+
+  onSubmit = e => {
+    e.preventDefault();
+    const ProductData = {
+      name: this.state.name,
+      imagePath: this.state.imagePath,
+      category: this.state.category,
+      prizeFourn: this.state.prizeFourn,
+      prizeSell: this.state.prizeSell,
+      quantity: this.state.quantity
+    };
+    this.props.addPorduct(ProductData, this.props.history);
+    console.log(ProductData);
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
     return (
-      <form className="Form col-md-8">
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label>Email</label>
-            <input
-              type="email"
-              className="form-control"
-              id="inputEmail4"
-              placeholder="Email"
-            />
+      <div className="productForm container">
+        <h1 className="display-q text-center">Creation de produit</h1>
+        <p className="lead text-center">
+          Entrer le information pour crée votre produit
+        </p>
+        <form onSubmit={this.onSubmit} className="Form col-md-8 ml-5">
+          <div className="form-row">
+            <div className="form-group col-md-12">
+              <label>Nom du produi</label>
+              <input
+                type="text"
+                name="name"
+                value={this.state.name}
+                onChange={this.onChange}
+                className="form-control"
+                placeholder="Nom du produit"
+              />
+            </div>
+            <div className="form-group col-md-12">
+              <label>Lien de l'image</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="image"
+                value={this.state.imagePath}
+                onChange={this.onChange}
+                name="imagePath"
+              />
+            </div>
+            <div className="form-group col-md-12">
+              <label>Prix de base</label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Prix de base"
+                value={this.state.prizeFourn}
+                onChange={this.onChange}
+                name="prizeFourn"
+              />
+            </div>
+            <div className="form-group col-md-12">
+              <label>Prix de vente</label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="prix"
+                value={this.state.prizeSell}
+                onChange={this.onChange}
+                name="prizeSell"
+              />
+            </div>
+            <div className="form-group col-md-12">
+              <label>Quantité</label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="quantit"
+                value={this.state.quantity}
+                onChange={this.onChange}
+                name="quantity"
+              />
+            </div>
+            <div className="form-group col-md-12">
+              <label>Category</label>
+              <select
+                className="form-control"
+                name="category"
+                value={this.state.category}
+                onChange={this.onChange}
+              >
+                <option defaultValue disabled>
+                  Categorie
+                </option>
+                <option>Salé</option>
+                <option>Sucré</option>
+              </select>
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Crée le produit
+            </button>
           </div>
-          <div className="form-group col-md-6">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="inputPassword4"
-              placeholder="Password"
-            />
-          </div>
-        </div>
-        <div className="form-group">
-          <label>Address</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputAddress"
-            placeholder="1234 Main St"
-          />
-        </div>
-        <div className="form-group">
-          <label>Address 2</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputAddress2"
-            placeholder="Apartment, studio, or floor"
-          />
-        </div>
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label>City</label>
-            <input type="text" className="form-control" id="inputCity" />
-          </div>
-          <div className="form-group col-md-4">
-            <label>State</label>
-            <select id="inputState" className="form-control">
-              <option defaultValue>Choose...</option>
-              <option>...</option>
-            </select>
-          </div>
-          <div className="form-group col-md-2">
-            <label>Zip</label>
-            <input type="text" className="form-control" id="inputZip" />
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="gridCheck"
-            />
-            <label className="form-check-label">Check me out</label>
-          </div>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Sign in
-        </button>
-      </form>
+        </form>
+      </div>
     );
   }
 }
-export default Form;
+
+Form.propTypes = {
+  product: PropTypes.object.isRequired,
+  addPorduct: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  product: state.product
+});
+
+export default connect(
+  mapStateToProps,
+  { addPorduct }
+)(withRouter(Form));

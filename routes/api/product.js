@@ -86,12 +86,24 @@ router.post("/", (req, res) => {
   Product.findOne({ name: req.body.name }).then(product => {
     // Check if name existe
     if (product) {
-      errors.name = "That product already exist";
-      res.status(400).json(errors);
-    }
+      // update
+      Product.findOneAndUpdate(
+        { name: req.body.name },
+        { $set: productFields },
+        { new: true }
+      ).then(product => res.json(product));
+      //console.log(req.body.name);
+    } else {
+      Product.findOne({ name: productFields.name }).then(product => {
+        if (product) {
+          errors.name = "That product already exist";
+          res.status(400).json(errors);
+        }
 
-    //Save Product
-    new Product(productFields).save().then(product => res.json(product));
+        //Save Product
+        new Product(productFields).save().then(product => res.json(product));
+      });
+    }
   });
 });
 
