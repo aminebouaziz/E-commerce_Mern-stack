@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profilesAction";
 import { Link } from "react-router-dom";
 
+import Cart from "./Cart";
 import Spinner from "../common/Spinner";
 import ProfileAction from "./ProfileAction";
 
@@ -60,6 +61,7 @@ class Dashboard extends Component {
             <div className="col-md-12">
               <h1 className="display-4">Dashboard</h1>
               {dashboardContent}
+              <Cart />
             </div>
           </div>
         </div>

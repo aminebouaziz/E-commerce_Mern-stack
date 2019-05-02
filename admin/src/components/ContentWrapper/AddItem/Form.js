@@ -110,7 +110,7 @@ class Form extends Component {
                 <option defaultValue disabled>
                   Categorie
                 </option>
-                <option>Salé</option>
+                <option >Salé</option>
                 <option>Sucré</option>
               </select>
             </div>

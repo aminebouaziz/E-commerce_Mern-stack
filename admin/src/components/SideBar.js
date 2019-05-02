@@ -24,21 +24,21 @@ class SideBar extends Component {
         <li className="nav-item">
           <Link className="nav-link" to="addProduct">
             <i className="fas fa-fw fa-chart-area" />
-            <span>Add Product</span>
+            <span>Ajouter produit</span>
           </Link>
         </li>
 
         <li className="nav-item">
           <Link className="nav-link" to="/products">
             <i className="fas fa-fw fa-table" />
-            <span>Products</span>
+            <span>Tout les produits</span>
           </Link>
         </li>
 
         <li className="nav-item">
           <Link className="nav-link" to="/user">
             <i className="fas fa-fw fa-table" />
-            <span>Users</span>
+            <span>Tout les utilisateurs</span>
           </Link>
         </li>
 

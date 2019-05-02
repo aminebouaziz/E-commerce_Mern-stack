@@ -22,6 +22,7 @@ import Feedback from "./components/feedback/Feedback";
 import SingleFeedback from "./components/singleFeedback/SingleFeedback";
 
 import "./App.css";
+import PageProduits from "./components/produits/PageProduits";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -53,6 +54,7 @@ class App extends Component {
           <div className="App">
             <Navbar />
             <Route exact path="/" component={Landing} />
+            <Route exact path="/product" component={PageProduits} />
 
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />

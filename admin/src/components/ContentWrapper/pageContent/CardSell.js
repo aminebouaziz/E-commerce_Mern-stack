@@ -9,10 +9,10 @@ class CardSell extends Component {
             <div className="row no-gutters align-items-center">
               <div className="col mr-2">
                 <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                  Earnings (Monthly)
+                  Nombres de commandes
                 </div>
                 <div className="h5 mb-0 font-weight-bold text-gray-800">
-                  $40,000
+                  200
                 </div>
               </div>
               <div className="col-auto">

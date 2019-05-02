@@ -50,7 +50,7 @@ class Navbar extends Component {
               }}
               title="Yout must have a gravatar Connected to your email "
             />
-            Logout
+            Se deconnecter
           </a>
         </li>
       </ul>
@@ -60,12 +60,12 @@ class Navbar extends Component {
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to="/register">
-            Sign Up
+            S'inscrire
           </Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/login">
-            Login
+            Se connecter
           </Link>
         </li>
       </ul>
