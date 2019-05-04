@@ -9,7 +9,7 @@ class ProduitItem extends Component {
     const { product } = this.props;
     return (
       <div
-        className="card card-product col-md-4 mb-3 ml-0
+        className="card card-product col-md-4 mb-3 ml-0 
       "
       >
         <div className="img-wrap">

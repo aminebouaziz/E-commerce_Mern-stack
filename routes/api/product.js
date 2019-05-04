@@ -82,6 +82,7 @@ router.post("/", (req, res) => {
   if (req.body.prizeFourn) productFields.prizeFourn = req.body.prizeFourn;
   if (req.body.prizeSell) productFields.prizeSell = req.body.prizeSell;
   if (req.body.quantity) productFields.quantity = req.body.quantity;
+  if (req.body.imagePath) productFields.imagePath = req.body.imagePath;
 
   Product.findOne({ name: req.body.name }).then(product => {
     // Check if name existe
