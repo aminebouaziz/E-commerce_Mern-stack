@@ -1,16 +1,24 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import { Link } from "react-router-dom";
+import {} from "../../actions/productActions";
 class ProduitItem extends Component {
   render() {
+    const { product } = this.props;
     return (
-      <div className="card card-product col-md-4 mb-2 ml-0">
+      <div
+        className="card card-product col-md-4 mb-3 ml-0
+      "
+      >
         <div className="img-wrap">
-          <img src="https://s3.amazonaws.com/peoplepng/wp-content/uploads/2018/06/15092400/Brown-Cake-PNG-Image-883x1024.png" />
+          <img src={product.imagePath} />
         </div>
 
         <figcaption className="info-wrap">
-          <h4 className="title">Gateau chocolat</h4>
-          <p className="desc">lorem</p>
+          <h4 className="title"> {product.name} </h4>
+          <p className="desc">{product.category}</p>
           {/* <div className="rating-wrap">
             <div className="label-rating">132 reviews</div>
             <div className="label-rating">154 orders </div>
@@ -21,7 +29,7 @@ class ProduitItem extends Component {
             Ajouter au panier
           </a>
           <div className="price-wrap h5">
-            <span className="price-new">1280dt</span>{" "}
+            <span className="price-new"> {product.prizeSell} </span>{" "}
             {/* <del className="price-old">1980dt</del> */}
           </div>
         </div>
@@ -29,4 +37,13 @@ class ProduitItem extends Component {
     );
   }
 }
-export default ProduitItem;
+
+ProduitItem.propTypes = {
+  product: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(ProduitItem);

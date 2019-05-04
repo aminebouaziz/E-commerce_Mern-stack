@@ -15,3 +15,6 @@ export const GET_FEDDBACKS = "GET_FEDDBACKS";
 export const GET_FEDDBACK = "GET_FEDDBACK";
 export const ADD_FEEDBACK = "ADD_FEEDBACK";
 export const DELETE_FEEDBACK = "DELETE_FEEDBACK";
+// product types
+export const GET_PRODUCTS = "GET_PRODUCTS";
+export const PRODUCT_LOADING = "PRODUCT_LOADING";
