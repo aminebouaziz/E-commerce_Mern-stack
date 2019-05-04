@@ -28,8 +28,8 @@ class Profiles extends Component {
         <div className="containeer">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4 text-center">Users</h1>
-              <p className="lead text-center">Tout vos utilisateur ...</p>
+              <h1 className="display-4 text-center">Clients</h1>
+              <p className="lead text-center">Tous vos Clients ...</p>
               {profileItems}
             </div>
           </div>

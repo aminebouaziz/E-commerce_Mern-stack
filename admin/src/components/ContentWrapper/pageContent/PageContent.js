@@ -11,7 +11,7 @@ class PageContent extends Component {
     return (
       <div class="container-fluid">
         <Heading />
-        {/* <!-- Content Row --> */}
+
         <div className="row">
           <CardUser />
           <CardSell />
