@@ -24,12 +24,17 @@ class Dashboard extends Component {
     const { cart } = this.props.cart;
 
     let dashboardContent;
-
+    let cartItems;
     if (profile === null || loading) {
       dashboardContent = <Spinner />;
     } else {
       // Cheack if logged user has profile
       if (Object.keys(profile).length > 0) {
+        if (profile === null) {
+          cartItems = <h1>Vous avez pas encore ajouter des produits</h1>;
+        } else {
+          cartItems = <PanierItems cart={cart} />;
+        }
         dashboardContent = (
           <div>
             <p className="lead text-muted">
@@ -57,12 +62,6 @@ class Dashboard extends Component {
           </div>
         );
       }
-    }
-    let cartItems;
-    if (profile === null) {
-      cartItems = <h1>Vous avez pas encore ajouter des produits</h1>;
-    } else {
-      cartItems = <PanierItems cart={cart} />;
     }
 
     return (
