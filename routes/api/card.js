@@ -15,6 +15,27 @@ const Product = require("../../models/Product");
 //Validation
 const validateCardInput = require("../../validation/feedback");
 
+// @route GET api/card
+// @desc get current user Card
+// @access private
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+    Card.findOne({ user: req.user.id })
+      .populate("user", ["name", "avatar"])
+      .then(card => {
+        if (!card) {
+          errors.nocard = "no cart !";
+          return res.status(404).json(errors);
+        }
+        res.json(card);
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
 // @route POST api/Card
 // @desc create a Card
 // @access private
@@ -50,6 +71,7 @@ router.post(
     Profile.findOne({ user: req.user.id }).then(profile => {
       Product.findById(req.params.product_id).then(product => {
         Card.findOne({ user: req.user.id })
+
           .then(card => {
             let productItem = product;
             if (card) {
@@ -106,7 +128,7 @@ router.delete(
           .map(item => item._id.toString())
           .indexOf(req.params.product_id);
 
-        // Splice comment out of array
+        // Splice product out of array
         card.products.splice(removeIndex, 1);
 
         card.save().then(card => res.json(card));

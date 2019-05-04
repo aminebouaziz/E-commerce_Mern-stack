@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profilesAction";
+import { getCurrentCart } from "../../actions/cartActions";
+
 import { Link } from "react-router-dom";
 
-import Cart from "./Cart";
 import Spinner from "../common/Spinner";
 import ProfileAction from "./ProfileAction";
+import PanierItems from "../panier/PanierItems";
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
+    this.props.getCurrentCart();
   }
   onDeleteClick = e => {
     this.props.deleteAccount();
@@ -18,6 +21,7 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
+    const { cart } = this.props.cart;
 
     let dashboardContent;
 
@@ -54,6 +58,13 @@ class Dashboard extends Component {
         );
       }
     }
+    let cartItems;
+    if (profile === null) {
+      cartItems = <h1>Vous avez pas encore ajouter des produits</h1>;
+    } else {
+      cartItems = <PanierItems cart={cart} />;
+    }
+
     return (
       <div className="dashboard">
         <div className="container">
@@ -61,7 +72,8 @@ class Dashboard extends Component {
             <div className="col-md-12">
               <h1 className="display-4">Dashboard</h1>
               {dashboardContent}
-              <Cart />
+              <hr />
+              {cartItems}
             </div>
           </div>
         </div>
@@ -74,15 +86,17 @@ Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  cart: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  cart: state.cart,
   auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, deleteAccount }
+  { getCurrentProfile, deleteAccount, getCurrentCart }
 )(Dashboard);

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Cart extends Component {
+class PanierItems extends Component {
   render() {
     return (
       <div className="row">
@@ -43,4 +43,4 @@ class Cart extends Component {
     );
   }
 }
-export default Cart;
+export default PanierItems;
