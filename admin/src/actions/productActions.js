@@ -2,7 +2,12 @@
 
 import axios from "axios";
 
-import { ADD_PRODUCT, GET_PRODUCT, DELETE_PRODUCT, GET_ERRORS } from "./types";
+import {
+  PRODUCT_LOADING,
+  GET_PRODUCT,
+  DELETE_PRODUCT,
+  GET_ERRORS
+} from "./types";
 
 // Add product
 export const addPorduct = (productData, history) => dispatch => {
@@ -15,4 +20,29 @@ export const addPorduct = (productData, history) => dispatch => {
         payload: err.response.data
       })
     );
+};
+// Get products
+export const getProducts = () => dispatch => {
+  dispatch(setProductLoading());
+  axios
+    .get("api/products/all")
+    .then(res =>
+      dispatch({
+        type: GET_PRODUCT,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PRODUCT,
+        payload: null
+      })
+    );
+};
+
+// set loading state
+export const setProductLoading = () => {
+  return {
+    type: PRODUCT_LOADING
+  };
 };

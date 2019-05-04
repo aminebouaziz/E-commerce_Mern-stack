@@ -1,70 +1,42 @@
 import React, { Component } from "react";
 
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { getProducts } from "../../../actions/productActions";
+import Spinner from "../../common/Spinner";
+
+import ProductFeed from "./ProductFeed";
+
 class Products extends Component {
+  componentDidMount() {
+    this.props.getProducts();
+  }
   render() {
+    const { products, loading } = this.props.product;
+    let productContent;
+
+    productContent = <ProductFeed products={products} />;
+
     return (
-      <div className="card-group ">
-        <div className="card  col-md-4">
-          <img
-            className="card-img-top"
-            src="https://www.freeiconspng.com/uploads/shipping-icon-1.png"
-            alt=""
-          />
-          <div className="card-body">
-            <h5 className="car-title">Card title</h5>
-            <p className="car-text">100 DT</p>
-          </div>
-          <div className="card-footer">
-            <small className="text-muted">3 min ago</small>
-          </div>
-        </div>
-
-        <div className="card col-md-4">
-          <img
-            className="card-img-top"
-            src="https://www.freeiconspng.com/uploads/shipping-icon-1.png"
-            alt=""
-          />
-          <div className="card-body">
-            <h5 className="car-title">Card title</h5>
-            <p className="car-text">100 DT</p>
-          </div>
-          <div className="card-footer">
-            <small className="text-muted">3 min ago</small>
-          </div>
-        </div>
-
-        <div className="card col-md-4">
-          <img
-            className="card-img-top"
-            src="https://www.freeiconspng.com/uploads/shipping-icon-1.png"
-            alt=""
-          />
-          <div className="card-body">
-            <h5 className="car-title">Card title</h5>
-            <p className="car-text">100 DT</p>
-          </div>
-          <div className="card-footer">
-            <small className="text-muted">3 min ago</small>
-          </div>
-        </div>
-
-        <div className="card col-md-4">
-          <img
-            className="card-img-top"
-            src="https://www.freeiconspng.com/uploads/shipping-icon-1.png"
-            alt=""
-          />
-          <div className="card-body">
-            <h5 className="car-title">Card title</h5>
-            <p className="car-text">100 DT</p>
-          </div>
-          <div className="card-footer">
-            <small className="text-muted">3 min ago</small>
-          </div>
-        </div>
+      <div className="container">
+        <h1 className="display-q text-center mb-5">Tout les produit</h1>
+        <div className="row">{productContent}</div>
       </div>
     );
   }
 }
-export default Products;
+
+Products.propTypes = {
+  getProducts: PropTypes.func.isRequired,
+  product: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  product: state.product
+});
+
+export default connect(
+  mapStateToProps,
+  { getProducts }
+)(Products);

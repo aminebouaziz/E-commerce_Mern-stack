@@ -9,3 +9,10 @@
 .card {
   margin-right: 50px;
 } */
+.img-prod {
+  width: 10px;
+}
+.img-wrap img {
+  width: 250px;
+  margin-left: 50px;
+}
