@@ -5,6 +5,15 @@ import PropTypes from "prop-types";
 class PanierItems extends Component {
   render() {
     const { cartId, products } = this.props;
+    //console.log(products.length);
+
+    const sommeProdcut = product => {
+      let somme = 0;
+      for (let i = 0; i < product.length; i++) {
+        somme += parseInt(product[i].prix);
+      }
+      return somme;
+    };
 
     return (
       <div className="row">
@@ -13,8 +22,8 @@ class PanierItems extends Component {
           <thead>
             <tr>
               <th>Nom du produit</th>
-              <th>Quantité</th>
-              <th>Prix</th>
+              <th>prix</th>
+
               <th />
             </tr>
           </thead>
@@ -25,18 +34,23 @@ class PanierItems extends Component {
           </tbody>
         </table>
         <h4 className="mb-2 col-md-6">
-          Quantité totale : <b>2</b>
+          Quantité totale : <b>{products.length}</b>
         </h4>
-        <h4 className="mb-2 col-md-">
-          prix totale : <b>68.00dt</b>
+        <h4 className="mb-2 col-md-6">
+          prix totale : <b>{sommeProdcut(products)}dt</b>
         </h4>
+
+        <button className="btn btn-primary col-md-12 mb-2">
+          {" "}
+          Passer une commande
+        </button>
       </div>
     );
   }
 }
 
 PanierItems.propTypes = {
-  products: PropTypes.array.isRequired,
+  products: PropTypes.object.isRequired,
   cartId: PropTypes.string.isRequired
 };
 export default PanierItems;

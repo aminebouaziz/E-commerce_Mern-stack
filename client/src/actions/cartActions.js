@@ -38,3 +38,21 @@ export const addProduct = (cartId, productData) => dispatch => {
       })
     );
 };
+
+// remove product from cart
+export const removeProduct = (cartId, productId) => dispatch => {
+  axios
+    .delete(`/api/card/rmProd/${cartId}/${productId}`)
+    .then(res =>
+      dispatch({
+        type: GET_CART,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};

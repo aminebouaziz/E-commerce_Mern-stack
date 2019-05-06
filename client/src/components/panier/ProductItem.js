@@ -1,18 +1,30 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { removeProduct } from "../../actions/cartActions";
 
 class ProductItem extends Component {
+  ClickremoveProduct = (cartId, productsId) => {
+    this.props.removeProduct(cartId, productsId);
+  };
+
   render() {
     const { products, cartId } = this.props;
-    console.log(products);
+    console.log(products._id);
     return (
       <tr>
         <td> {products.name} </td>
-        <td>1kg</td>
+
         <td>{products.prix}</td>
         <td>
-          <button className="btn btn-danger">Supprimer</button>
+          <button
+            onClick={() => {
+              this.ClickremoveProduct(cartId, products._id);
+            }}
+            className="btn btn-danger"
+          >
+            Supprimer
+          </button>
         </td>
       </tr>
     );
@@ -20,8 +32,13 @@ class ProductItem extends Component {
 }
 
 ProductItem.propTypes = {
-  products: PropTypes.array.isRequired,
-  cartId: PropTypes.string.isRequired
+  products: PropTypes.object.isRequired,
+  cartId: PropTypes.string.isRequired,
+  removeProduct: PropTypes.func.isRequired
 };
+const mapStateToProps = state => ({});
 
-export default ProductItem;
+export default connect(
+  mapStateToProps,
+  { removeProduct }
+)(ProductItem);
