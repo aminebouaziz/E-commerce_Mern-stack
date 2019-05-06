@@ -12,6 +12,12 @@ const CardSchema = new Schema({
       product: {
         type: Schema.Types.ObjectId,
         ref: "products"
+      },
+      name: {
+        type: String
+      },
+      prix: {
+        type: String
       }
     }
   ],

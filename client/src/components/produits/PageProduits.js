@@ -14,9 +14,27 @@ class PageProduits extends Component {
   }
   render() {
     const { products, loading } = this.props.product;
+    const { cart } = this.props;
+    console.log(cart.cart);
     let productContent;
 
-    productContent = <ProductFeed products={products} />;
+    // if (cart.cart === null) {
+    //   console.log(cart);
+    // } else {
+    //   console.log(cart);
+    // }
+
+    if (products === null) {
+      productContent = <Spinner />;
+    } else {
+      if (cart.cart === null) {
+        productContent = <ProductFeed products={products} />;
+      } else {
+        productContent = (
+          <ProductFeed cartId={cart.cart._id} products={products} />
+        );
+      }
+    }
 
     return (
       <div className="container">
@@ -29,11 +47,13 @@ class PageProduits extends Component {
 
 PageProduits.propTypes = {
   getProducts: PropTypes.func.isRequired,
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
+  cart: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  product: state.product
+  product: state.product,
+  cart: state.cart
 });
 
 export default connect(

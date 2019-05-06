@@ -24,11 +24,20 @@ router.get(
   (req, res) => {
     const errors = {};
     Card.findOne({ user: req.user.id })
-      .populate("user", ["name", "avatar"])
+      .populate("product", ["name", "prizeSell"])
       .then(card => {
         if (!card) {
-          errors.nocard = "no cart !";
-          return res.status(404).json(errors);
+          new Card({
+            nameProduct: req.body.nameProduct,
+            totPrize: req.body.totPrize,
+            totQte: req.body.totQte,
+            user: req.user.id
+          })
+            .save()
+            .then(card => {
+              card.products.unshift(productItem);
+              card.save().then(card => res.json(card));
+            });
         }
         res.json(card);
       })
@@ -62,7 +71,7 @@ router.post(
 );
 
 // @route POST api/card/addProduct/:product_id
-// @desc Add card
+// @desc Add product to card
 // @access Private
 router.post(
   "/addProduct/:product_id",
@@ -73,12 +82,14 @@ router.post(
         Card.findOne({ user: req.user.id })
 
           .then(card => {
-            let productItem = product;
+            let productItem = {
+              name: req.body.name,
+              prix: req.body.prix
+            };
             if (card) {
               console.log(productItem);
               card.products.unshift(productItem);
               card.save().then(card => res.json(card));
-              //Update
 
               res.json(card);
             } else {

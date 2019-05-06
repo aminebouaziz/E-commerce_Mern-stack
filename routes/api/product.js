@@ -47,6 +47,24 @@ router.get("/name/:name", (req, res) => {
     .catch(err => res.status(404).json(err));
 });
 
+// @route GET api/products/:id
+// @desc Get product by id
+// @access Public
+router.get("/:id", (req, res) => {
+  const errors = {};
+
+  Product.find({ _id: req.params.id })
+    .then(product => {
+      if (!product) {
+        errors.noproduct = "there is no product with this name";
+        res.status(404).json(errors);
+      }
+      console.log(product);
+      res.json(product);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
 // @route GET api/products/category/:category
 // @desc Get product by name
 // @access Public

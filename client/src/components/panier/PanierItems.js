@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import ProductItem from "./ProductItem";
+import PropTypes from "prop-types";
 
 class PanierItems extends Component {
   render() {
+    const { cartId, products } = this.props;
+
     return (
       <div className="row">
         <h4 className="mb-2">Panier</h4>
@@ -15,22 +19,9 @@ class PanierItems extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Macarons</td>
-              <td>1kg</td>
-              <td>8.00DT</td>
-              <td>
-                <button className="btn btn-danger">Supprimer</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Gateau aux pistache</td>
-              <td>1P</td>
-              <td>60.00dt</td>
-              <td>
-                <button className="btn btn-danger">Supprimer</button>
-              </td>
-            </tr>
+            {products.map(products => (
+              <ProductItem products={products} cartId={cartId} />
+            ))}
           </tbody>
         </table>
         <h4 className="mb-2 col-md-6">
@@ -43,4 +34,9 @@ class PanierItems extends Component {
     );
   }
 }
+
+PanierItems.propTypes = {
+  products: PropTypes.array.isRequired,
+  cartId: PropTypes.string.isRequired
+};
 export default PanierItems;

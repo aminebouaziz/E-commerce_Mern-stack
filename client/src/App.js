@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { clearProfileLoading } from "./actions/profilesAction";
-
+import { getCurrentCart } from "./actions/cartActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -45,6 +45,8 @@ if (localStorage.jwtToken) {
     window.location.href = "/login";
   }
 }
+
+store.dispatch(getCurrentCart());
 
 class App extends Component {
   render() {

@@ -25,16 +25,23 @@ class Dashboard extends Component {
 
     let dashboardContent;
     let cartItems;
+
+    if (cart === null) {
+      cartItems = <h1>Vous avez pas encore ajouter des produits</h1>;
+    } else {
+      cartItems = <PanierItems products={cart.products} cartId={cart._id} />;
+    }
     if (profile === null || loading) {
       dashboardContent = <Spinner />;
     } else {
       // Cheack if logged user has profile
       if (Object.keys(profile).length > 0) {
-        if (profile === null) {
-          cartItems = <h1>Vous avez pas encore ajouter des produits</h1>;
-        } else {
-          cartItems = <PanierItems cart={cart} />;
-        }
+        // if (profile === null) {
+        //
+        // } else {
+        //
+        // }
+
         dashboardContent = (
           <div>
             <p className="lead text-muted">

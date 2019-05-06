@@ -5,9 +5,10 @@ import ProduitItem from "./ProduitItem";
 
 class ProductFeed extends Component {
   render() {
-    const { products } = this.props;
+    const { products, cartId } = this.props;
+
     return products.map(product => (
-      <ProduitItem key={product._id} product={product} />
+      <ProduitItem key={product._id} cartId={cartId} product={product} />
     ));
   }
 }

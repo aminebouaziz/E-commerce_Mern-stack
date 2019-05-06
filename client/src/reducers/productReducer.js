@@ -1,4 +1,8 @@
-import { GET_PRODUCTS, PRODUCT_LOADING } from "../actions/types";
+import {
+  GET_PRODUCTS,
+  PRODUCT_LOADING,
+  GET_PRODUCT_BYID
+} from "../actions/types";
 
 const initialState = {
   product: {},
@@ -17,6 +21,11 @@ export default function(state = initialState, action) {
         ...state,
         products: action.payload,
         ...state.products
+      };
+    case GET_PRODUCT_BYID:
+      return {
+        ...state,
+        product: action.payload
       };
     default:
       return state;
