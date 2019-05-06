@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { addProduct } from "../../actions/cartActions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 class ProduitItem extends Component {
+  notify = () => toast("Ajouter au panier");
   constructor(props) {
     super(props);
     this.state = {
@@ -31,6 +35,7 @@ class ProduitItem extends Component {
         className="card card-product col-md-4 mb-3 ml-0 
       "
       >
+        <ToastContainer />
         <div className="img-wrap">
           <img src={product.imagePath} />
         </div>
@@ -45,11 +50,15 @@ class ProduitItem extends Component {
         </figcaption>
         <div className="bottom-wrap">
           <button
-            onClick={this.onClickAjout}
+            onClick={() => {
+              this.onClickAjout();
+              this.notify();
+            }}
             className="btn btn-sm btn-primary float-right"
           >
             Ajouter au panier
           </button>
+
           <div className="price-wrap h5">
             <span className="price-new"> {product.prizeSell} </span>{" "}
             {/* <del className="price-old">1980dt</del> */}
