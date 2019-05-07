@@ -21,3 +21,5 @@ export const PRODUCT_LOADING = "PRODUCT_LOADING";
 // cart types
 export const GET_CART = "GET_CART";
 export const GET_PRODUCT_BYID = "GET_PRODUCT_BYID";
+// order types
+export const GET_ORDER = "GET_ORDER";

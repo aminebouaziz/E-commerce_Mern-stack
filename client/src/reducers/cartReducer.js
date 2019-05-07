@@ -1,7 +1,8 @@
-import { GET_CART } from "../actions/types";
+import { GET_CART, GET_ORDER } from "../actions/types";
 
 const initialState = {
-  cart: null
+  cart: null,
+  order: null
 };
 
 export default function(state = initialState, action) {
@@ -10,6 +11,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cart: action.payload
+      };
+    case GET_ORDER:
+      return {
+        ...state,
+        order: action.payload
       };
     default:
       return state;

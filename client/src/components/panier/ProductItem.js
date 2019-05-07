@@ -9,8 +9,8 @@ class ProductItem extends Component {
   };
 
   render() {
-    const { products, cartId } = this.props;
-    console.log(products._id);
+    const { products, cartId, profile } = this.props;
+
     return (
       <tr>
         <td> {products.name} </td>
@@ -34,9 +34,12 @@ class ProductItem extends Component {
 ProductItem.propTypes = {
   products: PropTypes.object.isRequired,
   cartId: PropTypes.string.isRequired,
+  profile: PropTypes.object.isRequired,
   removeProduct: PropTypes.func.isRequired
 };
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  profile: state.profile
+});
 
 export default connect(
   mapStateToProps,

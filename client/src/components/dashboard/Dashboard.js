@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Spinner from "../common/Spinner";
 import ProfileAction from "./ProfileAction";
 import PanierItems from "../panier/PanierItems";
+import isEmpty from "../../validation/is-empty";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -26,21 +27,20 @@ class Dashboard extends Component {
     let dashboardContent;
     let cartItems;
 
-    if (cart === null) {
-      cartItems = <h1>Vous avez pas encore ajouter des produits</h1>;
-    } else {
-      cartItems = <PanierItems products={cart.products} cartId={cart._id} />;
-    }
-    if (profile === null || loading) {
+    if (profile === null || loading || cart === null) {
       dashboardContent = <Spinner />;
     } else {
+      //console.log(cart.products);
+
       // Cheack if logged user has profile
       if (Object.keys(profile).length > 0) {
-        // if (profile === null) {
-        //
-        // } else {
-        //
-        // }
+        if (isEmpty(cart.products)) {
+          cartItems = <h1>Vous devez choisir des produits</h1>;
+        } else {
+          cartItems = (
+            <PanierItems products={cart.products} cartId={cart._id} />
+          );
+        }
 
         dashboardContent = (
           <div>
@@ -99,7 +99,8 @@ Dashboard.propTypes = {
 const mapStateToProps = state => ({
   profile: state.profile,
   cart: state.cart,
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
 export default connect(
