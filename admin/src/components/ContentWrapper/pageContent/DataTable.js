@@ -18,8 +18,9 @@ class DataTable extends Component {
       console.log("waiting ...");
       orderItems = <Spinner />;
     } else {
+      
       orderItems = <TableFeed orders={order.order} />;
-      //console.log(order.order);
+      
     }
     return (
       <div className="card shadow mb-4 col-md-10">

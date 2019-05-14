@@ -57,7 +57,7 @@ router.post(
 //  @acess Public
 router.delete(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
+ 
   (req, res) => {
     Order.findById(req.params.id)
       .then(order => order.remove().then(() => res.json({ success: true })))

@@ -13,9 +13,10 @@ class PageProduits extends Component {
     this.props.getProducts();
   }
   render() {
-    const { products, loading } = this.props.product;
-    const { cart } = this.props;
-    console.log(cart.cart);
+    const { products, loading,  } = this.props.product;
+    const { cart ,auth} = this.props;
+    let buttonAuth
+   
     let productContent;
 
     // if (cart.cart === null) {
@@ -24,14 +25,14 @@ class PageProduits extends Component {
     //   console.log(cart);
     // }
 
-    if (products === null) {
+    if (products === {}) {
       productContent = <Spinner />;
     } else {
       if (cart.cart === null) {
-        productContent = <ProductFeed products={products} />;
+        productContent = <ProductFeed auth={auth.isAuthenticated} products={products} />;
       } else {
         productContent = (
-          <ProductFeed cartId={cart.cart._id} products={products} />
+          <ProductFeed auth={auth.isAuthenticated} cartId={cart.cart._id} products={products} />
         );
       }
     }
@@ -53,7 +54,8 @@ PageProduits.propTypes = {
 
 const mapStateToProps = state => ({
   product: state.product,
-  cart: state.cart
+  cart: state.cart,
+  auth: state.auth
 });
 
 export default connect(

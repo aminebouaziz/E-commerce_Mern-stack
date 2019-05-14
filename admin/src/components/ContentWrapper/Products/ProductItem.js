@@ -3,8 +3,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
+import {deleteProduct} from '../../../actions/productActions'
 
 class ProductItem extends Component {
+
+  delete = idProduct =>{
+    console.log(idProduct)
+    this.props.deleteProduct(idProduct)
+    window.location.href = "/products";
+  }
+
   render() {
     const { product } = this.props;
     return (
@@ -25,11 +33,11 @@ class ProductItem extends Component {
           </div> */}
         </figcaption>
         <div className="bottom-wrap">
-          <a href="" className="btn btn-sm btn-danger float-right">
+          <button onClick={()=>{this.delete(product._id)}} href="" className="btn btn-sm btn-danger float-right">
             Supprimer Produit
-          </a>
+          </button>
           <div className="price-wrap h5">
-            <span className="price-new"> {product.prizeSell} </span>{" "}
+            <span className="price-new"> {product.prizeSell} Dt</span>{" "}
             {/* <del className="price-old">1980dt</del> */}
           </div>
         </div>
@@ -39,11 +47,12 @@ class ProductItem extends Component {
 }
 
 ProductItem.propTypes = {
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
+  deleteProduct : PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(ProductItem);
+export default connect(mapStateToProps,{deleteProduct})(ProductItem);

@@ -46,3 +46,21 @@ export const setProductLoading = () => {
     type: PRODUCT_LOADING
   };
 };
+
+// Delete product
+export const deleteProduct = (productId) => dispatch => {
+  axios
+    .delete(`/api/products/${productId}`)
+    .then(res =>
+      dispatch({
+        type: GET_PRODUCT,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};

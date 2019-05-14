@@ -1,11 +1,24 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ProductItems from "./ProductItems";
+import {deleteOrder} from '../../../actions/orderActions'
+import { connect } from "react-redux";
+
 
 class TableItem extends Component {
+
+  delete = (idOrder) =>{
+   this.props.deleteOrder(idOrder);
+      console.log(idOrder);
+      window.location.href = "/dashboard";
+  }
+
   render() {
     const { orders } = this.props;
-    console.log(orders.orders[0]);
+    //console.log("order",orders.orders[0]._id);
+
+   
+
     return (
       <tr>
         <td>{orders.orders[0].nameUser}</td>
@@ -19,11 +32,11 @@ class TableItem extends Component {
           ))}
         </td>
         <td>
-          <a href="#" className="btn btn-danger btn-icon-split">
+          <a  className="btn btn-danger btn-icon-split">
             <span className="icon text-white-50">
               <i className="fas fa-trash" />
             </span>
-            <span className="text">Supprimer commende</span>
+            <button onClick={()=>{this.delete(orders._id)}} className="text btn ">Supprimer commende</button>
           </a>
         </td>
       </tr>
@@ -31,6 +44,10 @@ class TableItem extends Component {
   }
 }
 TableItem.propTypes = {
-  orders: PropTypes.array.isRequired
+  orders: PropTypes.array.isRequired,
+  deleteOrder : PropTypes.func.isRequired
 };
-export default TableItem;
+const mapStateToProps = state =>({
+
+})
+export default connect(mapStateToProps,{deleteOrder})(TableItem);

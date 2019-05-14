@@ -16,3 +16,5 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const PRODUCT_LOADING = "PRODUCT_LOADING";
 // Order
 export const GET_ORDER = "GET_ORDER";
+
+export const GET_FEDDBACKS = "GET_FEDDBACKS";

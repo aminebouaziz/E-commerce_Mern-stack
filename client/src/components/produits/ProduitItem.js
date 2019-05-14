@@ -13,7 +13,8 @@ class ProduitItem extends Component {
     super(props);
     this.state = {
       name: this.props.product.name,
-      prix: this.props.product.prizeSell
+      prix: this.props.product.prizeSell,
+ 
     };
   }
 
@@ -27,9 +28,35 @@ class ProduitItem extends Component {
     this.props.addProduct(cartId, productContent);
   };
 
-  render() {
-    const { product, cartId } = this.props;
 
+  render() {
+    const { product, cartId,auth } = this.props;
+ let authContent 
+ console.log(auth)
+     if(!auth.isAuthenticated === false){
+      authContent= (
+        <button
+                
+                   onClick={() => {
+                     this.onClickAjout();
+                     this.notify();
+                   }}
+                   className="btn btn-sm btn-primary float-right"
+                 >
+                   Ajouter au panier
+                 </button>
+        )
+     }else{
+       authContent = (
+          <button
+                 
+                   disabled
+                   className="btn btn-sm btn-primary float-right"
+                 >
+                   Vous devez vous connecter
+                 </button>
+       )
+     }
     return (
       <div
         className="card card-product col-md-4 mb-3 ml-0 
@@ -49,18 +76,10 @@ class ProduitItem extends Component {
           </div> */}
         </figcaption>
         <div className="bottom-wrap">
-          <button
-            onClick={() => {
-              this.onClickAjout();
-              this.notify();
-            }}
-            className="btn btn-sm btn-primary float-right"
-          >
-            Ajouter au panier
-          </button>
+         {authContent}
 
           <div className="price-wrap h5">
-            <span className="price-new"> {product.prizeSell} </span>{" "}
+            <span className="price-new"> {product.prizeSell} DT </span>{" "}
             {/* <del className="price-old">1980dt</del> */}
           </div>
         </div>

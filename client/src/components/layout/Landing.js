@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Sec1 from "./Sec1";
 
 class Landing extends Component {
   componentDidMount() {
@@ -11,6 +12,7 @@ class Landing extends Component {
   }
   render() {
     return (
+      <div className="landingPage">
       <div className="landing">
         <div className="dark-overlay landing-inner text-light">
           <div className="container">
@@ -26,17 +28,15 @@ class Landing extends Component {
                   transformation et de commercialisation de ces produits :
                   gâteaux et tartes notamment.
                 </p>
-                <hr />
-                <Link to="/register" className="btn btn-lg btn-info mr-2">
-                  S'inscrire
-                </Link>
-                <Link to="login" className="btn btn-lg btn-light">
-                  Se connecter
-                </Link>
+              
               </div>
+              
             </div>
           </div>
         </div>
+        
+      </div>
+      <Sec1/>
       </div>
     );
   }

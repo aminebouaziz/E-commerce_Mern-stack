@@ -20,7 +20,7 @@ class Products extends Component {
 
     return (
       <div className="container">
-        <h1 className="display-q text-center mb-5">Tout les produit</h1>
+        <h1 className="display-q text-center mb-5">Tout les produits</h1>
         <div className="row">{productContent}</div>
       </div>
     );
